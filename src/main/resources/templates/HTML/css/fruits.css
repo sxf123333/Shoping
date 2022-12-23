@@ -1,0 +1,108 @@
+/*购买水果*/
+.main-left{width: 960px;float: left;overflow: hidden;margin:0px 0 0px 0;}
+.buy-fruits{width: 960px;overflow: hidden;}
+/*水果图*/
+.buy-fruits .fruits-img{width: 390px;float: left;}
+.buy-fruits .fruits-img .big-fruits-img{width: 390px;height: 390px;}
+.buy-fruits .fruits-img .small-fruits-img{overflow: hidden;margin-top: 20px;}
+.buy-fruits .fruits-img .small-fruits-img li{width: 60px;height: 60px;float: left;margin:10px 8px 0;cursor: pointer;}
+.buy-fruits .fruits-img .small-fruits-img li img{width: 100%;height: 100%;}
+/*水果信息*/
+.buy-fruits .fruits-info{width: 540px;float: right;}
+.buy-fruits .fruits-info .fruits-name{font-size: 20px;font-weight: 400;margin-bottom: 30px;}
+.buy-fruits .fruits-info .price-batch{height: 100px;background: #ecfdf2;margin:15px 0;}
+.price-batch .price-box{padding:15px 0;text-align: left;}
+.price-batch .text{font-style: normal;text-indent: 20px;padding-top: 5px;}
+.price-batch .span{width: 100px;display: inline-block;color: #a1a1a1;}
+.price-batch .span span.count{color: #a1a1a1;}
+.price-batch .price-box .price{color: #009933;font-size: 20px;}
+.xinxin{color: #F39800;}
+.chenjiao-pinjia .chenjiao{margin: 0 10px;}
+.fruits-address{margin:20px 0;}
+.buy-number .number{display: inline-block;}
+.buy-number .buy-num{float: left;display: inline-block;height: 27px;line-height: 27px;margin-right: 20px;}
+.buy-number .number .num{height: 25px;width: 25px;text-align: center;line-height: 22px;color: #888;
+						display: inline-block;cursor: pointer;font-size: 18px;}
+.buy-number .number .minus{border-right: none;float: left;font-size: 24px;}
+.buy-number .number .plus{border-left:none;float: left;}
+.buy-number .number .text-num{width: 70px;height:25px;outline:none;text-align: center;color: #888;
+								margin:0;float: left;}
+.buy-number .number .text-num:hover{border:1px solid #009933;}
+.total-price{height: 43px;background: #fafafa;margin-top: 15px;border-top: 1px solid #e5e5e5;
+			border-bottom: 1px solid #e5e5e5;}
+.total-price .totalPrice{float: left;width: 389px;}
+.total-price .totalPrice .fruits-num{width: 150px;text-align: right;height: 43px;line-height: 43px;float: left;}
+.total-price .totalPrice .br{height: 18px;float: left;width: 1px;background: #e5e5e5;margin: 13px 15px 0;}
+.total-price .totalPrice .fruits-num{font-size: 12px;}
+.total-price .totalPrice .fruits-num .num{font-size: 18px;}
+.total-price .totalPrice .total{height: 43px;line-height: 43px;font-size: 12px;}
+.total-price .totalPrice .total .money{font-size: 18px;}
+.total-price .check-fruits{float: right;width: 150px;height: 43px;line-height: 43px;text-align: center;
+							border-left: 1px solid #e5e5e5;font-size: 16px;}
+.buy-btn .btn{width: 260px;float: left;margin-top: 35px;}
+.buy-btn .btns{width: 160px;height: 40px;line-height: 40px;display: inline-block;text-align: center;
+				color: #fff;cursor: pointer;font-size: 16px;}
+.buy-btn .left-btn{text-align: right;}
+.buy-btn .right-btn{text-align: left;}
+.buy-btn .right-btn .join-fruit-car{margin-left: 20px;}
+.lg-btn{display: inline-block;height: 35px;width: 80px;text-align: center;line-height: 35px;background: #009933;color: #fff;margin-left: 10px;}
+/*店铺信息*/
+.main-right{float: right;overflow: hidden;width: 220px;}
+.main-right .tit{height: 30px;background: #fafafa;line-height: 30px;text-indent: 8px;margin:0px 0 0 1px;color: #009933;font-size: 18px;}
+.bus-info .touxian-name{padding:15px;border-bottom: 1px solid #e5e5e5;text-align: center;}
+.bus-info .touxian-name .touxian{margin:0 auto;width: 80px;}
+.bus-info .touxian-name .touxian img{border-radius: 50%;}
+.bus-info .touxian-name .name{display: block;margin-top: 10px;}
+.bus-info .touxian-name .senfen{display: inline-block;padding:2px 5px;font-size: 12px;border-radius: 2px;margin-top: 10px;color: #999;}
+.bus-info .validate-info{text-align: center;margin:20px auto;}
+.bus-info .validate-info img{width: 35px;}
+.bus-info .enter-collect{text-align: center;margin:15px 0;}
+.bus-info .enter-collect .button{display: inline-block;text-align: center;width: 90px;height: 30px;color: #fff;
+					line-height: 30px;font-size: 12px;margin:0 3px;}
+/*其他水果*/
+.other-fruits{margin-top: 20px;overflow: hidden;}
+.other-fruits .other-title .next-fruits{float: right;margin-right: 8px;}
+.other-fruits .other-title .next-fruits:hover{color: #009933;}
+.other-fruits .other-guo{width: calc(100% - 10px);padding:10px 5px;overflow: hidden;border-bottom: 1px solid #e6e6e6;}
+.other-fruits .other-guo .guo-img{width: 100%;height: 150px;overflow: hidden;}
+.other-fruits .other-guo .guo-img img{width: 100%;height: 100%;transform: scale(1);transition: .5s;}
+.other-fruits .other-guo .guo-img img:hover{transform: scale(1.2);}
+.other-fruits .other-guo .guo-price{color: #009933;margin: 5px 0;display: inline-block;float: left;}
+.other-fruits .other-guo .user-name{margin: 5px 0;display: inline-block;float: right;}
+.other-fruits .other-guo .guo-name{width: 100%;display: block;}
+/*详细信息、成交量、评价*/
+.fruits-detail{overflow: hidden;margin-top: 50px;clear: both;padding-bottom: 20px;}
+.fruits-detail .hd-detail-title{border-top:1px solid #009933;height: 45px;line-height: 45px;}
+.fruits-detail .hd-detail-title li{float: left;padding:0 20px;margin-right: 30px;min-width: 80px;text-align: center;}
+.fruits-detail .hd-detail-title li a{display: block;}
+.fruits-detail .hd-detail-title li.co-blue a{color: #009933;}
+.fruits-detail .detail-info{border-top: none;min-height: 500px;}
+.fruits-detail .detail-info img{max-width: 960px;}
+.fruits-detail .pinjia-detail{height: 200px;border-top: none;}
+.fruits-detail .pinjia-detail .add-time{float: right;}
+.fruits-detail .pinjia-detail .grade-num-time{height: 40px;background: #ecfdf2;line-height: 40px;padding:0 10px;margin-top: 10px;}
+.fruits-detail .pinjia-detail .chenjiao-num{margin-left: 20px;}
+.fruits-detail .pinjia-detail .comment{margin: 10px 0;}
+.fruits-detail .detail{display: none;}
+.fruits-detail .chenjiao-detail .user{font-size: 12px;width: 30px;display: block;text-align: center;}
+
+.price-units{margin:20px 0 15px;}
+.price-units span{color: #009933;}
+.mg{margin-bottom: 20px;}
+.hits.current a, .hits.current a i, .hits.current span{color: #00a236;}
+/*举报低价*/
+.sell-inform-price{background: #f39800;color: #fff;padding:6px 8px 4px;border:0;margin: 0px 0 0 10px;cursor: pointer;}
+.sell-inform-price:hover{background: #fda513;}
+.sell-inform-price i{color: #fff;margin-right: 5px;}
+#sell-inform-price{padding:20px;}
+#sell-inform-price textarea{border:1px solid #e6e6e6;resize:none;width: calc(100% - 20px);height: 100px;padding:8px;border-radius: 5px;}
+#sell-inform-price .title{margin:10px 0;color: #444;}
+/*图片上传框*/
+.upload-list{position: relative;width: 60px;float: left;margin-right: 13.6px;}
+.upload-list .btnImg{height: 62px;width: 62px;border:1px dashed #999;position: relative;}
+.upload-list .btnImg .img-shade{position: absolute;left:0;top:0;width: 100%;height: 100%;display: none;}
+.upload-list .btnImg .icon{position: absolute;top:50%;left: 50%;margin-top:-10px;margin-left: -10px;color: #999;font-size: 18px;}
+.upload-list .btnImg img{width: 100%;height: 100%;}
+.upload-list .delImg{cursor:pointer;position: absolute;top:-5px;right: -5px;display: block;height: 18px;width: 18px;color:#fff;
+	line-height: 15px;text-align: center;background: rgba(0,0,0,.7);display: none;}
+.upload{cursor: pointer !important;}

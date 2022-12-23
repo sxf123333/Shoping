@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200">
+    <title>添加货源</title>
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/iconfont.css">    
+<link rel="stylesheet" type="text/css" href="css/layui.css">
+    <link rel="stylesheet" href="css/xui.css">
+    <link rel="stylesheet" type="text/css" href="css/add_product.css">
+    <style type="text/css">
+        .units{width: 100%;height: 36px;border:1px solid #e6e6e6;padding-left: 8px;}
+        .layui-layer-content{color: #666;}
+    </style>
+
+<link href="css/ueditor.css" type="text/css" rel="stylesheet">
+<link id="layuicss-layer" rel="stylesheet" href="css/layer.css?v=3.1.1" media="all">
+<link rel="stylesheet" type="text/css" href="css/codemirror.css">
+<link id="layuicss-laydate" rel="stylesheet" href="css/laydate.css?v=5.0.9" media="all">
+</head>
+
+<body style="">
+<!--头部 header start-->
+
+
+    <div class="wrap">
+        <div class="content">
+            <div class="logo">
+                <a href="" target="_blank">
+                    <img src="img/lg-text.png" alt="">
+                </a>
+            </div>
+</div>
+    </div>
+
+
+
+<!--头部 header end--><div class="member-banner">
+</div>
+    <div class="message-box">
+        <div class="content">
+            <!--消息-->
+            <div class="m-notice">
+
+                <ul class="list" style="top: -168.313px;">
+                                        <li>
+                        <a class="ellipsis" href="https://www.guo68.com/users/usersmessage/detail?id=87799">
+                            <span></span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a class="ellipsis" href="https://www.guo68.com/users/usersmessage/detail?id=87800">
+                            <span></span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a class="ellipsis" href="https://www.guo68.com/users/usersmessage/detail?id=87801">
+                            <span></span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a class="ellipsis" href="https://www.guo68.com/users/usersmessage/detail?id=87802">
+                            <span></span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a class="ellipsis" href="https://www.guo68.com/users/usersmessage/detail?id=87803">
+                            <span></span>
+                        </a>
+                    </li>
+                                    <li>
+                        <a class="ellipsis" href="https://www.guo68.com/users/usersmessage/detail?id=87799">
+                            <span></span>
+                        </a>
+                    </li></ul>
+            </div>
+        </div>
+    </div>
+<!--会员中心主体   main start-->
+<div class="main" style="">
+    <div class="content" style="">
+        <!--左侧slide-nav-->
+<div class="m-slide-nav box-bor">
+    <ul>
+
+        <li>
+            <a href="index01.html">
+                <i class="iconfont icon-aipinpaidianpuxiangqingmaishouzhuye icon"></i>
+                <span class="nav-text">货源管理</span>
+            </a>
+        </li>
+
+    </ul>
+</div>
+<!--右侧对应导航内容-->        <div class="m-right-info" style="">
+            <div class="crumb">
+                <a href="https://www.guo68.com/users/product/index" class="crm">货源管理</a>
+                <span class="jiantou">&gt;</span>
+                <a class="crm">发布货源</a>
+            </div>
+
+            <div class="form-box" style="">
+            <form action="index01.html" class="form-input" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label label-title">产品名称：</label>
+                    <div class="layui-input-block input-box wd300">
+                    <!--    <input type="text" name="FruitsName" placeholder="产品名称" class="layui-input" autocomplete="off" value=""/>-->
+
+                            <select id="select" class="units" name="fruitsName">
+
+                            </select>
+
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label label-title">产品单价：</label>
+                    <div class="layui-input-block input-box wd300">
+                        <input type="text" name="fruitPrice" placeholder="产品单价" class="layui-input" autocomplete="off" value=""/>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label label-title">产品数量：</label>
+                    <div class="layui-input-block input-box wd300">
+                        <input type="text" name="fruitNum" placeholder="产品数量" class="layui-input" autocomplete="off" value=""/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label label-title">产品信息：</label>
+                    <div class="layui-input-block input-box wd300">
+                        <input type="text" name="fruitmessage" placeholder="产品信息" class="layui-input" autocomplete="off" value=""/>
+                    </div>
+                </div>
+              
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 130px;">
+                        <button  class="layui-btn" onclick="sub()">添加</button>
+                        <a href="index01.html" class="layui-btn layui-btn-primary">返回</a>
+                    </div>
+                </div>
+
+        </form>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="utils/AjaxUtils.js"></script>
+<script>
+$(function (){
+
+    fu();
+})
+function fu(){
+    var params = {};
+    var url = "http://localhost:8080/Sxfpaper_war_exploded/Fruits/FruitsSelect";
+    var types = ajaxUtils.ajaxPost(url, params);
+    for (var i=0;i<types.length;i++){
+        var type=types[i];
+        var tempate= "<option value="+type.fid+">"+type.fname+"</option>";
+        $("select").append(tempate);
+}
+}
+    function sub(){
+        var params={};
+        var id=sessionStorage.getItem("ids");
+        params.userId=id;
+        params.fruitsName=$("[name=fruitsName]").val();
+        params.fruitPrice=$("[name=fruitPrice]").val();
+        params.fruitNum=$("[name=fruitNum]").val();
+        params.fruitmessage=$("[name=fruitmessage]").val();
+        console.log(params);
+        var url="http://localhost:8080/Sxfpaper_war_exploded/Shops/Shopsinsert";
+        var info=ajaxUtils.ajaxPost(url,params);
+        if(info!=null){
+            alert("添加成功");
+            window.location.href="http://localhost:8080/Sxfpaper_war_exploded/HTML/index01.html";
+        }else {
+            alert("添加失败")
+        }
+
+    }
+</script>
+</body>
+</html>

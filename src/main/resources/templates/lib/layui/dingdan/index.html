@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>订单</title>
+    <style>
+        .cart {
+            margin: 0 auto;
+            width: 700px;
+            padding: 0 10px 10px;
+            border: 1px solid #D5E5F5;
+        }
+
+        .cart-title {
+            margin-bottom: 10px;
+            font-size: 14px;
+            border-bottom: 1px solid #AED2FF;
+            line-height: 30px;
+            height: 30px;
+            font-weight: 700;
+            text-indent: 15px;
+            color: #333;
+            font-family: 'Microsoft YaHei';
+        }
+
+        .cart-table {
+            width: 100%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            font-size: 12px;
+            font-family: Verdana, "Microsoft YaHei";
+            color: #333;
+        }
+
+        .cart-table th {
+            border-bottom: 2px solid #B2D1FF;
+            font-weight: normal;
+            height: 35px;
+            line-height: 23px;
+        }
+
+        .cart-item {
+            background-color: #FAFCFF;
+            border-bottom: 1px dotted #84B3FD;
+        }
+
+
+        .cart-item td {
+            height: 55px;
+            text-align: center;
+        }
+
+        .cart-item .cart-txt-left {
+            text-align: left;
+        }
+
+        .cart-name {
+            color: #3366D4;
+            font-weight: bold;
+        }
+
+        .cart-subtotal {
+            color: #FF3334;
+            font-weight: bold;
+        }
+
+        .cart-reduce,
+        .cart-add {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            color: #FFF;
+            background-color: #BDBDBD;
+            border: 0;
+            cursor: pointer;
+            border-radius: 2px;
+            font-family: 'Arial';
+            font-size: 13.3333px;
+        }
+
+        .cart-reduce:hover,
+        .cart-add:hover {
+            background-color: #FF9900;
+        }
+
+        .cart-num {
+            margin: 5px;
+            width: 35px;
+            text-align: center;
+            height: 20px;
+            line-height: 20px;
+            padding: 0 3px;
+            display: inline-block;
+            background: #fff;
+            border: 1px solid #bbb
+        }
+
+        .cart-del,
+        .cart-all {
+            color: #3366D4;
+        }
+
+        .cart-del:hover,
+        .cart-all:hover {
+            text-decoration: underline;
+            cursor: pointer
+        }
+
+        .cart-bottom {
+            height: 55px;
+            text-align: right
+        }
+
+        .cart-bottom .cart-all {
+            position: relative;
+            top: 1px
+        }
+
+        .cart-total-price {
+            color: #FF3334;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .cart-bottom-btn {
+            color: #FFF;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0 20px;
+            background: #FE8502;
+            border: 1px solid #FF6633;
+            border-radius: 5px 5px 5px 5px;
+            padding: 6px 12px;
+        }
+
+        .cart-bottom-btn:hover {
+            background: #FF6600;
+        }
+    </style>
+    
+</head>
+<body>
+<div class="cart">
+    <div class="cart-title">我的订单</div>
+    <table class="cart-table" border="" cellspacing="" cellpadding="">
+        <tr>
+            <!--      <th><span class="cart-all">全选</span></th>-->
+            <th>用户名称</th>
+            <th>用户地址</th>
+            <th>购买日期</th>
+            <th>手机号</th>
+            <th>商品名称</th>
+            <th>商品价格</th>
+            <th>商品类型</th>
+            <th>总价</th>
+
+        </tr>
+        <tbody id="tbody">
+        <tr class="cart-item">
+
+        </tr>
+        
+        </tbody>
+
+        <tr id="cart-bottom" class="cart-bottom">
+        
+        </tr>
+    </table>
+</div>
+<!--引入js文件-->
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script src="../adminGoods/utils/utils.js"></script>
+<script src="../adminGoods/static/js/AjaxUtils.js"></script>
+<script>
+    
+    
+    
+    var id = serilizeUrl(location.href.toString(), 'uid');
+    var params = {};
+    params.uid = id;
+    
+    var url = "http://localhost:8080/order/select"
+    var obj = ajaxUtils.ajaxPost(url, params);
+    var zongjia = 0;
+    
+    for (var i = 0; i < obj.date.length; i++) {
+        
+        var target = obj.date[i];
+        
+        console.log(target);
+
+        var date = timestampToTime(target.time);
+        
+        var template = "<tr class=\"cart-item\">\n" +
+            "            <td>" + target.user.name + "</td>\n" +
+            "            <td>" + target.address + "</td>\n" +
+            "            <td>" + target.date + "</td>\n" +
+            "            <td>" + target.iphone + "</td>\n" +
+            "            <td>" + target.goods.name + "</td>\n" +
+            "            <td>" + target.goods.price + "</td>\n" +
+            "            <td>" + target.type.tname + "</td>\n" +
+            "             <td colspan=\"6\">\n" +
+            "                <span class=\"cart-bottom-span\">"+target.goods.price+"元!"+"<span class=\"cart-total-price\"></span></span>\n" +
+            "            </td>"
+        
+            "        </tr>";
+        
+        zongjia = zongjia + (target.goods.price);
+        // 将模板当儿子用
+        $("#tbody").append(template);
+        
+    }
+   
+    
+    function timestampToTime(timestamp) {
+        var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        Y = date.getFullYear() + '/';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '/';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y+M+D;
+    }
+</script>
+</body>
+</html>

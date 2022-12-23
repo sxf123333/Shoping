@@ -1,0 +1,32 @@
+.register{position: relative;}
+.register .reg-box{width: 1000px;margin:20px auto;}
+.register .register-btn-box{width: 300px;float: right;margin: 5px 0 20px 0;}
+.register .register-btn-box .register-btn{cursor:pointer;width: 110px;height: 40px;background: #009933;border:0;color: #FFFFFF;font-size: 16px;}
+.register .register-btn-box .register-btn:hover{background: #00aa39;}
+
+.reg-form,.input {width: 400px;margin:0 auto;}
+.reg-form input:focus{border-color: #009933 !important;transition:all 1s;}
+.reg-form .input{height: 40px;clear: both;margin-top: 20px;}
+.reg-form .input .type .inpor:after{position:absolute;display: block;content: "*";clear: both;left:-10px;top:-7px;
+color: #009933;}
+.reg-form .input .type{width: 100px;float: left;display: block;text-align: right;float: left;
+height: 40px;line-height: 40px;}
+.reg-form .input .type .inpor{position: relative;}
+.reg-form .input .select{width: 300px;height:40px;border:1px solid #e5e5e5;outline: none;float: right;}
+.reg-form .input-text input{width: 298px;height:38px;border:1px solid #e5e5e5;float: left;
+outline: none;text-indent: 10px;}
+.reg-form .input-text input.phone{width: 198px;}
+.reg-form .phone-verify{float: right;width: 99px;display: block;height: 38px;border:1px solid #e5e5e5;line-height: 38px;text-align: center;
+				border-left: none;cursor: pointer;}
+.reg-form .input-text input.img_verify_code{width: 198px;float: left;}
+
+.protocol-reg-btn{width: 400px;margin:0 auto;}
+.protocol {width: 300px;float:right;height: 60px;}
+.protocol  .checkbox{float: left;border:1px solid #E5E5E5;width: 15px;height: 15px;margin-top:16px;cursor: pointer;border-radius: 2px;}
+.protocol  .checkbox.check{background: url(../img/check.jpg); border: 1px solid #009933;}
+.protocol  .check-text{width: 270px;float: right;height: 60px;padding-top: 8px;}
+.protocol  .text{color: #009933;}
+.ul-bor{border: 1px solid #e5e5e5;width: 99.8%;top: 39px;left: 0;position: absolute;}
+.re-ul{border-bottom-style: none;}
+.layui-tab-brief>.layui-tab-title .layui-this {color: #009933;}
+.layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after {border-bottom: 2px solid #009933;}

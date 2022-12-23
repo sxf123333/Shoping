@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200"/>
+    <title>中国水果交易网会员登录页</title>
+    <link rel="stylesheet" type="text/css" href="HTML/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="HTML/css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="HTML/css/login.css" />
+    <link rel="shortcut icon" href="#"/>
+    <style type="text/css">
+        .layui-layer-content{color: #fff;}
+    </style>
+</head>
+<body>
+
+
+<!--头部-head end-->
+<!--登录-banner start-->
+<div class="login-bg">
+    <div class="banner">
+        <div class="login-form">
+            <h2 class="title">会员登录</h2>
+            <form action="login.html" class="form-input" method="post">
+                <input type="text" name="userName" class="username"  autocomplete="off"  placeholder="请输入账号" value=""/>
+                <input type="password" name="password" class="password" placeholder="请输入密码" value=""/>
+                <button type="button" class="btn-login" onclick="sub()">登录</button>
+            </form>
+            <a href="http://localhost:8080/GoodsSys_war_exploded/HTML/register.html" class="reg-btn">注册</a>
+        </div>
+    </div>
+</div>
+   
+   
+</div>
+<script src="HTML/js/jquery-1.11.2.min.js" ></script>
+<script src="HTML/utils/AjaxUtils.js"></script>
+<script type="text/javascript">
+function sub(){
+    var params={};
+    params.userName=$("[name=userName]").val();
+    params.password=$("[name=password]").val();
+    var url="http://localhost:8080/GoodsSys_war_exploded/User/UserSelect";
+    var list=ajaxUtils.ajaxPost(url,params);
+
+    console.log(list);
+    if(list[0]!=null){
+        alert("欢迎你用户！");
+        location.href="http://localhost:8080/GoodsSys_war_exploded/HTML/index01.html";
+    }else{
+        alert("账号或密码错误");
+    }
+
+}
+</script>
+</body>
+</html>

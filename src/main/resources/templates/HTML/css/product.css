@@ -1,0 +1,18 @@
+.product-table .tr-check .title{display: block;width: 100%;max-width: 300px;cursor: pointer;}
+.product-table .tr-check a.title:hover{color: #00a236;}
+.product-table .tr-check .title.sell{max-width: 150px;}
+.product-table .tr-check .title.exhibtion{max-width: 200px;}
+/*覆写layui样式*/
+.layui-tab{margin:0;}
+.layui-tab-title li{line-height: 20px;font-size: 16px;}
+.layui-tab-brief>.layui-tab-title .layui-this{color: #5aa701;}
+.layui-tab-title{height: 30px;position: relative;}
+.layui-tab-title .layui-this:after{height: 31px;border-bottom: 2px solid #5aa701;}
+.layui-tab-content{padding:0;}
+.layui-table td, .layui-table th{padding:5px 15px;}
+/*功能操作*/
+.action-btn{padding:20px 0;}
+/*产品管理的搜索表单盒子*/
+.input-box{width: 200px;float: left;margin-right: 20px;}
+/*复选框样式*/
+.check-select.check{background: url(HTML/img/lg-text.png);border:1px solid #009688;}

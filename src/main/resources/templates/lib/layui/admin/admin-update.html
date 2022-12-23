@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>欢迎页面-X-admin2.2</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <link rel="stylesheet" href="../../../css/font.css">
+        <link rel="stylesheet" href="../../../css/xadmin.css">
+        <script src="../../layui/layui.js" charset="utf-8"></script>
+       
+        <script src="../../../js/xadmin.js"></script>
+        <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+        <!--[if lt IE 9]>
+            <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+            <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+    <form class="layui-form">
+
+        <input type="hidden" id="id" name="id">
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="x-red">*</span>商品名称</label>
+            <div class="layui-input-inline">
+                <input type="text" id="name" name="name" required="" lay-verify="nikename" autocomplete="off" class="layui-input"></div>
+        </div>
+        <div class="layui-form-item">
+            <label for="tid" class="layui-form-label">
+                <span class="x-red">*</span>商品类型</label>
+            <div class="layui-input-inline">
+                <div class="layui-input-inline layui-show-xs-block">
+                    <select id="tid" name="tid">
+
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="price" class="layui-form-label">
+                <span class="x-red">*</span>价格</label>
+            <div class="layui-input-inline">
+                <input type="text" id="price" name="price" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
+        </div>
+        <!--************这里是上传图片的代码***************-->
+        <!--************这里添加的隐藏的输入框，用来传递images的参数***************-->
+        <input type="hidden" name="url" class="image" id="imgurls">
+        <div class="layui-form-item">
+            <label class="layui-form-label ">照片:</label>
+            <div class="layui-upload">
+                <button type="button" class="layui-btn" id="test1">上传图片</button>
+                <img class="layui-upload-img" id="demo1" style="width: 50px;height: 50px">
+                <p id="demoText"></p>
+
+            </div>
+        </div>
+        <!--************上面里是上传图片的代码***************-->
+        <div class="layui-form-item">
+            <label  class="layui-form-label"></label>
+            <button class="layui-btn" lay-filter="add" lay-submit="">修改</button></div>
+    </form>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../../../HTML/utils/AjaxUtils.js"></script>
+    <script src="../../../HTML/utils/utils.js"></script>
+    <script>layui.use(['form', 'layer'],
+
+        function() {
+            $ = layui.jquery;
+            var form = layui.form,
+                layer = layui.layer;
+            
+            var id= serilizeUrl(location.href.toString(),'id');
+            alert(id);
+            var param={};
+            param.id=id;
+
+            var url="../../../goods/selectById"
+            var info=ajaxUtil.ajaxPost(url,param);
+
+            $("[name=name]").val(info.date.name);
+            $("[name=tid]").val(info.date.tid);
+            $("[name=price]").val(info.date.price);
+            $("[name=id]").val(info.date.id);
+            var imgurl=info.date.url
+            var img=document.getElementById('demo1');
+            img.src="../../../../"+imgurl+"";
+
+
+
+            var param1={};
+            var url1="../../../type/select";
+            var data=ajaxUtil.ajaxPost(url1,param1);
+            var obj1=data.date;
+
+            var template="<option>请选择</option>";
+            //循环
+            for(var i=0;i<obj1.length;i++){
+                //如果当前的角色id和用户表roleid相同 加上没人选择标签 selected
+                if(obj1.tid==obj1[i].id){
+                    var child="<option selected value="+(obj1[i].id)+">"+(obj1[i].tname)+"</option>";
+                }else{
+                    var child="<option value="+(obj1[i].id)+">"+(obj1[i].tname)+"</option>";
+                }
+
+                template+=child;
+            }
+            $("select").append(template);
+
+            form.render("select");
+            //监听提交
+            form.on('submit(add)',
+                function(data) {
+
+                    //发异步，把数据提交给php
+                    layer.alert("修改成功", {
+                            icon: 6
+                        },
+                        function() {
+                            var param={};
+                            param.name=$("#name").val();
+                            param.tid=$("#tid").val();
+                            param.price=$("#price").val();
+                            param.id=$("#id").val();
+                            param.url=$("#imgurls").val();
+                            var url="../../../goods/update"
+                            var data=ajaxUtil.ajaxPost(url,param);
+                            console.log(param)
+                            if(data.code==200){
+                                xadmin.close();
+                                // 可以对父窗口进行刷新 
+                                xadmin.father_reload();
+                            }else {
+                                layer.msg(data.msg,{icon:1,time:1000});
+                            }
+                        });
+                    return false;
+                });
+
+        });</script>
+    <script>var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();</script>
+    -<!-------------------------图片上传js------------------------------->
+    <script>
+
+        layui.use('upload', function(){
+            var $ = layui.jquery
+                ,upload = layui.upload;
+
+            //普通图片上传
+            var uploadInst = upload.render({
+                elem: '#test1'
+                ,url: 'http://localhost:8080/upload'
+                ,accept:'url'
+                ,size:50000
+                ,before: function(obj){
+
+                    obj.preview(function(index, file, result){
+
+                        $('#demo1').attr('src', result);
+                    });
+                }
+                ,done: function(res){
+                    //如果上传失败
+                    if(res.code > 0){
+                        return layer.msg('上传失败');
+                    }
+                    //上传成功
+                    var demoText = $('#demoText');
+                    demoText.html('<span style="color: #4cae4c;">上传成功</span>');
+
+                    var fileupload = $(".image");
+                    fileupload.attr("value",res.data.src);
+                    var values="File"+fileupload.attr("value");
+                    $("[name=url]").val(values);
+
+                }
+                ,error: function(){
+                    //演示失败状态，并实现重传
+                    var demoText = $('#demoText');
+                    demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                    demoText.find('.demo-reload').on('click', function(){
+                        uploadInst.upload();
+                    });
+                }
+            });
+
+
+        });
+    </script>
+    <!--------------------------------------------------图片上传js--------------------------------------------->
+
+
+    </body>
+
+</html>

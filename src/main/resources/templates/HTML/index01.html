@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200">
+    <title>货源管理</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" type="text/css" href="css/common.css?66787845364">
+<link rel="stylesheet" type="text/css" href="css/iconfont.css?66787845364">
+    <link rel="stylesheet" type="text/css" href="css/layui.css?66787845364">
+    <link rel="stylesheet" type="text/css" href="css/product.css?66787845364">
+    <style type="text/css">
+        .layui-layer-content{color: #fff;}
+    </style>
+
+    <link rel="shortcut icon" href="#"/>
+    <script src="utils/AjaxUtils.js"></script>
+</head>
+
+<body>
+<!--头部 header start-->
+
+<!--头部 header end--><div class="member-banner">
+</div>
+    <div class="message-box">
+        <div class="content">
+
+            </div>
+        </div>
+    </div>
+<!--会员中心主体   main start-->
+<div class="main">
+    <div class="content">
+        <!--左侧slide-nav-->
+<div class="m-slide-nav box-bor">
+    <ul>
+
+
+        <li class="ative">
+            <a href="https://www.guo68.com/users/sell/index">
+                <i class="iconfont icon-aipinpaidianpuxiangqingmaishouzhuye icon"></i>
+                <span class="nav-text">货源管理</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<!--右侧对应导航内容-->        <div class="m-right-info">
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">货源管理 </li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="action-btn">
+                            <button class="layui-btn pro-btn" onclick="add()">添加货源</button>
+
+                        </div>
+
+                        <div class="product-table" style="padding-top: 0px;">
+                            <table class="layui-table" lay-skin="line">
+
+                                <thead>
+                                <tr class="tr-check">
+                                    <th>序号</th>
+                                    <th>商品名称</th>
+                                    <th>规格</th>
+                                    <th>库存数量</th>
+                                    <th>单价</th>
+                                    <th>总价</th>
+                                    <th>操作</th>
+                                </tr>
+
+                                </thead>
+                                <tbody id="tbody">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="page-box"></div>
+                    </div>
+                    <div class="layui-tab-item">2</div>
+                    <div class="layui-tab-item">3</div>
+                    <div class="layui-tab-item">4</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--会员中心主体   main end-->
+<!--尾部 footer start-->
+<div class="footer">
+    <div class="f-bor"></div>
+
+
+</div>
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="utils/utils.js"></script>
+<script src="utils/AjaxUtils.js"></script>
+<script type="text/javascript">
+$(function (){
+    selectGoods();
+})
+
+//查询
+function selectGoods(){
+    var params={};
+    var url="http://localhost:8080/GoodsSys_war_exploded/Goods/GoodsSelect";
+    var list=ajaxUtil.ajaxPost(url,params);
+    if(list!=null){
+        for (var i=0;i<list.length;i++){
+            var obj=list[i];
+            var tempate="  " +
+                "<tr class=\"tr-check\">\n" +
+                "<td class=\"outs_id\">"+obj.id+"</td>\n" +
+                "<td>"+obj.name+"</td>\n" +
+                "<td>"+obj.spec+"</td>\n" +
+                "<td>"+obj.stock+"</td>\n" +
+                "<td>"+obj.price+"</td>\n" +
+                "<td>"+(obj.price*obj.stock)+"</td>\n" +
+                "<td>\n" +
+                "<button class='layui-btn layui-btn-xs' onclick='update("+obj.id+")'>修改</button>" +
+                "<button onclick='del("+obj.id+")' class=\"layui-btn layui-btn-danger layui-btn-xs\">删除</button>\n" +
+                "</td>\n" +
+                "</tr>";
+            $("tbody").append(tempate);
+        }
+    }
+}
+//修改
+function update(id){
+    location.href="http://localhost:8080/GoodsSys_war_exploded/HTML/update.html?id="+id;
+}
+
+   //添加
+   function add(){
+       location.href="http://localhost:8080/GoodsSys_war_exploded/HTML/add.html";
+   }
+ //删除
+function del(id){
+var params={};
+params.id=id;
+var url="http://localhost:8080/GoodsSys_war_exploded/Goods/Goodsdelete";
+var info=ajaxUtil.ajaxPost(url,params);
+if(info!=null){
+    alert("删除成功");
+    $("#tbody").html("");
+    selectGoods();
+}
+
+}
+
+</script>
+
+</body></html>

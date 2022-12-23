@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200"/>
+    <title>欢迎来到用户信息注册页面</title>
+
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/iconfont.css" />    
+    <link rel="stylesheet" type="text/css" href="css/layui.css">
+    <link rel="stylesheet" type="text/css" href="css/xui.css">
+    <link rel="stylesheet" type="text/css" href="css/register.css" />
+    <style type="text/css">
+        .layui-layer-content{color: #fff;}
+    </style>
+</head>
+<body>
+
+<div class="head">
+    <div class="logo">
+        <a href=""><img src="" alt="" /></a>
+    </div>
+    <div class="reg-title lg-title">
+        <img src="img/register.png"/>
+    </div>
+</div>
+<!--头部-head end-->
+<!--注册-register start-->
+<div class="register clearFlo">
+
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+
+        <div class="ul-bor"></div>
+        <ul class="layui-tab-title re-ul" style="width: 590px;margin:0 auto;">
+                        <li class="layui-this">
+                <a href="register.htm">普通用户</a>
+            </li>
+
+                    </ul>
+        <div class="layui-tab-content">
+
+            <div class="layui-tab-item tab-item layui-show">
+                <form action="" class="reg-form check-form">
+    <div class="input input-text">
+        <p class="type"><span class="inpor">账号&nbsp;:</span>&nbsp;</p>
+        <input type="text" name="userName" placeholder="设置账号" autocomplete="off" value="">
+    </div>
+    <div class="input input-text">
+        <p class="type"><span class="inpor">用户密码&nbsp;:</span>&nbsp;</p>
+        <input type="password" name="password" placeholder="设置用户密码" value="">
+    </div>
+
+    <input type="hidden" name="adminid" value="2"/>
+    
+
+    <div class="protocol-reg-btn clearFlo">
+      
+        <div class="register-btn-box">
+            <button type="button" class="register-btn" onclick="regAdmin()">注册</button>
+            <button type="button" class="register-btn" onclick="fanhui()">返回</button>
+        </div>
+    </div>
+
+	</form>
+</div>
+
+
+</div>
+    </div>
+</div>
+<script src="js/jquery-1.11.2.min.js" ></script>
+<script src="utils/AjaxUtils.js"></script>
+<script type="text/javascript">
+    function regAdmin(){
+        var params={};
+        params.name=$("[name=userName]").val();
+        params.pwd=$("[name=password]").val();
+        params.adminid=2;
+
+        console.log(params);
+        var url="../../../user/insert";
+        var info=ajaxUtil.ajaxPost(url,params);
+        if(info!=""){
+            alert("欢迎你用户！");
+            location.href="../index.html";
+        }else{
+            alert("账号重复，请重新输入");
+        }
+    }
+    function fanhui(){
+        location.href="../login.html";
+    }
+</script>
+
+</body>
+</html>

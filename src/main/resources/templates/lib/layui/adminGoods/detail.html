@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200"/>
+    <title></title>
+    <link rel="shortcut icon" href="https://www.guo68.com/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/iconfont.css" />    <link rel="stylesheet" type="text/css" href="css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="css/fruits.css"/>
+    <style type="text/css">
+        .look-num{padding:5px 8px;background: #00a236;color: #fff;}
+        .look-num:hover{color: #fff;background: #01b33c;}
+        .layui-layer-content{color: #fff;}
+    </style>
+    <script src="utils/utils.js"></script>
+</head>
+<body>
+<!--头部 header start-->
+<div class="header">
+    <div class="topbar">
+        <div class="content">
+
+
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="content">
+            <div class="logo">
+                <a href="https://www.guo68.com/" target="_blank">
+                    <img src=" img/logo.png" alt="guo68.com" />
+                </a>
+            </div>
+            <div class="searchbox">
+                <div class="search">
+                    <form action="https://www.guo68.com/search" method="get" class="search-from">
+                        <select class="select" style="width: 97px;" name="type">
+                            <option value="产地货源" >产地货源</option>
+                            <option value="销售市场" >销售市场</option>
+                            <option value="水果行情" >水果行情</option>
+                            <option value="行业展会" >行业展会</option>
+                            <option value="行业资讯" >行业资讯</option>
+                        </select>
+                        <input type="text" onfocus="if(this.value=='请输入搜索的内容'){this.value='';}" class="ser-text" value="请输入搜索的内容" name="kw" autocomplete="off"/>
+                        <button type="submit" class="ser-btn">搜索</button>
+                    </form>
+                </div>
+
+                <div class="search-right-nav">
+                    <ul>
+                        <li>
+                            <a href="https://www.guo68.com/users/collect/fruits"><i class="iconfont icon-guanzhu icon"></i>收藏夹</a>
+                        </li>
+<!--                        <li>-->
+<!--                            <a href="#"><i class="iconfont icon-bangzhu icon"></i>帮助中心</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="#"><i class="iconfont icon-gouwuche icon"></i>水果车</a>-->
+<!--                        </li>-->
+                        <li>
+                            <a href="tencent://message/?uin=99628038"><i class="iconfont icon-kefu icon" target="_blank"></i>在线客服</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <div class="content">
+            <ul class="nav-list">
+                <li>
+                    <a href="index.html">网站首页</a>
+                </li>
+                <li>
+                    <a href="https://www.guo68.com/sell">产地货源</a>
+                </li>
+<!--                <li>-->
+<!--                    <a href="--><!--">销售市场</a>-->
+<!--                </li>-->
+                <li>
+                    <a href="https://www.guo68.com/market">水果行情</a>
+                </li>
+                <li>
+                    <a href="https://www.guo68.com/exhibition">行业展会</a>
+                </li>
+                <li>
+                    <a href="https://www.guo68.com/news">行业资讯</a>
+                </li>
+                <li>
+                    <a href="https://www.guo68.com/help">帮助</a>
+                </li>
+            </ul>
+            <div class="data-time" id="data-time"></div>
+        </div>
+    </div>
+</div>
+<!--头部 header end-->
+<!--主体main区域 start-->
+<div class="main">
+    <div class="content">
+        <!--渲染这里-->
+        <form>
+        <div id="main-left" class="main-left">
+
+
+        </div>
+        </form>
+
+    </div>
+        </div>
+
+
+<!--尾部 footer start-->
+
+<script type="text/javascript" src="js/jquery-1.11.2.min.js" ></script>
+<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../HTML/utils/AjaxUtils.js"></script>
+
+<script src="utils/utils.js"></script>
+<script type="text/javascript">
+    $(function (){
+        var id = serilizeUrl(location.href.toString(),'id');
+        console.log(id)
+
+
+        var param={};
+        param.id=id;
+        console.log(param)
+        var url="../../../goods/select"
+        var data=ajaxUtil.ajaxPost(url,param);
+        if(data!=null){
+            for(var i=0;i<data.date.length;i++){
+                var obj=data.date[i];
+                console.log("obj",obj);
+                var tempate="<div class=\"buy-fruits\">\n" +
+                    "                <div class=\"fruits-img\">\n" +
+                    "                    <div class=\"big-fruits-img\">\n" +
+                    "                        <img src=\"../2022-04-21/8580b385e9134d5e64212feb7b2b54aa.jpg.390_390_thumb.jpg\" alt=\"\" width=\"100%\" height=\"100%\" id=\"big-img\" alt=\"水果图片\"/>\n" +
+                    "                    </div>\n" +
+                    "\n" +
+                    "                </div>\n" +
+                    "                <div class=\"fruits-info\">\n" +
+                    "\n" +
+                    "                    <h2 id=\"fruitmessage\" class=\"fruits-name\"></h2>\n" +
+                    "                    <div class=\"price-units\">\n" +
+                    "                        商品名称：<span id=\"gName\">"+obj.name+"</span>\n" +
+                    "                    </div>\n" +
+                    "                    <div class=\"price-units\">\n" +
+                    "                        单价：<span  id=\"fruitPrice\" name=\"fruitPrice\">"+obj.price+"元/斤</span>\n" +
+                    "                    </div>\n" +
+                    "                    <div class=\"fruits-address\">\n" +
+                    "                        <em>购买数量：</em>\n" +
+                    "                        <span class=\"ss\">\n" +
+                    "                            <input type=\"text\" name=\"num\" value=\"\">\n" +
+                    "                        </span>\n" +
+                    "                    </div>\n" +
+                    "                    <div class=\"fruits-address\">\n" +
+                    "                        <em>商品类型："+obj.tname+"</em>\n" +
+                    "                        <span id=\"address\" class=\"address\"></span>\n" +
+                    "                    </div>\n" +
+                    "            <button type=\"submit\" class=\"lg-btn bule-btn\" onclick=\"purchase()\">购买</button>\n\n" +
+                    "                </div>\n" +
+                    "\n" +
+                    "            </div>";
+                $("#main-left").append(tempate);
+            }
+        }
+
+    })
+
+function purchase(){
+    var id = serilizeUrl(location.href.toString(),'uid');
+    var params={};
+    params.id=id;
+    var url="../../../user/select";
+    var datas=ajaxUtil.ajaxPost(url,params);
+    console.log(datas)
+    alert(datas)
+    var  price=$("[name=fruitPrice]").text();
+    var num=$("[name=num]").val();
+    var sum=parseInt(price)*num;
+    if (sum>datas.date[0].money){
+        //当用户余额不足以支付商品总价时跳往充值页面
+        alert("您的余额不足，请充值后购买！");
+        window.location.replace="recharge.html?id="+datas.date[0].id;
+    }else {
+        location.href="ordersub.html?id="+datas.date[0].id;
+    }
+
+}
+</script>
+</body>
+</html>

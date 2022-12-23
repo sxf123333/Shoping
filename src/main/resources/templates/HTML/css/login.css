@@ -1,0 +1,18 @@
+.login-bg{height: 434px;background: #ebf2e2;margin-bottom: 50px;}
+.login-bg .banner{width: 1000px;overflow: hidden;margin:0 auto;height: 434px;background: url(../img/login-bg.jpg);}
+.login-bg .banner .login-form{float: right;width: 348px;height: 320px;
+border:1px solid #a1a1a1;background: #FFFFFF;margin:50px 10px;}
+.login-form .title{font-weight:400;font-size: 24px;color:#009933;margin:15px 25px;}
+.login-form .form-input{width: 300px;margin:0px auto;}
+.login-form .form-input input:focus{border-color: #009933;transition:1s;}
+.login-form .form-input .username,.password{width: 298px;height: 38px;border:1px solid #e5e5e5;outline: none;
+text-indent: 10px;margin-bottom: 15px;}
+.login-form .form-input .btn-login,.login-form .reg-btn{width: 300px;height: 40px;border-radius: 5px;background: #009933;
+    color: #FFFFFF;font-size: 16px;border:0;outline: none;cursor: pointer;}
+.login-form .reg-btn{display: block;background: #f39800;text-align: center;line-height: 40px;margin:0 auto;margin-top: 15px;}
+.login-form .reg-btn:hover{background: #fda513;}
+.login-form .form-input .btn-login:hover{background: #00aa39;}
+.form-link ul{float: right;margin: 15px 23px 0 0;}
+.form-link ul li{float: left;margin-left: 9px;}
+.form-link ul li a{color: #00a236;font-size: 15px;}
+.form-link ul li a:hover{color: #009933;}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200"/>
+    <title>中国水果交易网会员登录页</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <link rel="shortcut icon" href="#"/>
+    <style type="text/css">
+        .layui-layer-content{color: #fff;}
+    </style>
+
+</head>
+<body>
+
+<!--头部 header end-->
+<!--头部-head start-->
+<div class="head">
+    <div class="logo">
+        <a href=""><img src="" alt="" /></a>
+    </div>
+    <div class="lg-title">
+        <img src="img/lg-text.png"/>
+    </div>
+</div>
+<!--头部-head end-->
+<!--登录-banner start-->
+<div class="login-bg">
+    <div class="banner">
+        <div class="login-form">
+            <h2 class="title">用户充值</h2>
+            <form action="login.html" class="form-input" method="post">
+                当前余额：<input type="text" name="thismoney" class="thismoney"  autocomplete="off" value=""/><br>
+                充值金额：<input type="text" name="money" class="money" placeholder="请输入要充值的金额" value=""/>
+                <button type="button" class="btn-login" onclick="sub()">充值</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-1.11.2.min.js" ></script>
+<script src="utils/AjaxUtils.js"></script>
+<script type="text/javascript">
+function sub(){
+    var params={};
+    params.username=$("[name=username]").val();
+    params.password=$("[name=password]").val();
+    var url="http://localhost:8080/Sxfpaper_war_exploded/User/Userselect";
+    var list=ajaxUtils.ajaxPost(url,params);
+
+    console.log(list);
+    if(list!=null){
+    for (var i = 0; i < list.length; i++){
+        var obj=list[i];
+            if(obj.adminid==2){
+                sessionStorage.setItem("id", obj.id);
+                location.href="http://localhost:8080/Sxfpaper_war_exploded/HTML/index.html";
+            }else if(obj.adminid==1){
+                sessionStorage.setItem("id", obj.id);
+                location.href="http://localhost:8080/Sxfpaper_war_exploded/HTML/index01.html";
+            }
+        }
+    }else{
+        alert("账号或密码错误");
+    }
+
+}
+</script>
+</body>
+</html>

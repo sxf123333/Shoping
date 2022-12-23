@@ -1,0 +1,30 @@
+.disabled{ pointer-events: none;}
+/*联动类型特效*/
+.xui-cate{position: relative;cursor: pointer;width: 100%;clear: both;}
+.xui-cate .xui-cate-list{position: absolute;left:1px;top:37px;z-index: 1000;min-width: 200px;display: none;}
+.xui-cate .xui-cate-input{width: 100%;height: 38px;border:1px solid #e6e6e6;color: #999999;line-height: 38px;text-indent: 10px;
+    float: left;border-top-left-radius: 2px;border-bottom-left-radius: 2px;white-space: nowrap;}
+.xui-cate .xui-cate-input.bright{color:#1ABB9C;}
+.xui-cate-list .xui-cate-lists{border:1px solid #e6e6e6;height: 194px;overflow: auto;float: left;width: 110px; background: #f8f8f8;}
+.xui-cate-lists li{width:calc(100% - 13px);padding:10px 5px;text-align: center;border-bottom:1px solid #e6e6e6;}
+.xui-cate-lists li.current{background: #fff;border-left:3px solid #5A738E;}
+.xui-cate-lists:nth-child(2) li.current{background: #fff;border-left:3px solid #1ABB9C;}
+.xui-cate-lists:nth-child(3) li.current{background: #fff;border-left:3px solid #fca515;}
+/*select下拉类型分类*/
+.xui-select-cate{position:relative;height: 36px;border:1px solid #e6e6e6;text-indent: 10px;}
+.xui-select-cate .xui-select-input{line-height: 36px;display: block;cursor: pointer;}
+.xui-select-cate .btn{position: absolute;right: -5px;top:0;}
+.xui-select-cate .xui-select-list{position: absolute;left: 0;top:38px;max-height: 290px;border:1px solid #e6e6e6;background: #fff;width: 100%;
+    z-index: 1000;  overflow: auto;display: none;}
+.xui-select-list li{padding:6px 0;border-bottom: 1px solid #e6e6e6;cursor: pointer;}
+.xui-select-list li:last-child{border:0;}
+.xui-select-list li.current{background: #5A738E;-border-left:3px solid #5A738E;color: #fff;}
+.xui-select-lists.lev1 li.current{background: #1ABB9C;-border-left:3px solid #1ABB9C;}
+.xui-select-lists.lev2 li.current{background: #fca515;-border-left:3px solid #fca515;}
+.xui-select-list .sun-cate{background: #fff;color: #73879C;margin: 7px 0 -7px 0;}
+/*发送验证码*/
+.phone-verify-code{width:100%;height: 100%;background: rgba(236,253,242,1);display: inline-block;text-align: center;
+    color: #444;border-radius: 2px;cursor: pointer;float:left;}
+.phone-verify-code .send-verify-code{color: #03586b;color: #444;}
+.phone-verify-code .old-send{display: none;}
+.phone-verify-code .old-send i.time{font-style: normal;}

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it.shop.dao.CarDao">
+
+    <resultMap type="com.it.shop.entity.Car" id="CarMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="gid" column="gid" jdbcType="INTEGER"/>
+        <result property="uid" column="uid" jdbcType="INTEGER"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+        
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="CarMap">
+        select
+          id, gid, uid, state
+        from car
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="CarMap">
+        select
+        id, gid, uid, state
+        from car
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="gid != null">
+                and gid = #{gid}
+            </if>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from car
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="gid != null">
+                and gid = #{gid}
+            </if>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into car(gid, uid, state,weight)
+        values (#{gid}, #{uid}, #{state},#{weight})
+    </insert>
+
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into car(gid, uid, state)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.gid}, #{entity.uid}, #{entity.state})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into car(gid, uid, state)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.gid}, #{entity.uid}, #{entity.state})
+        </foreach>
+        on duplicate key update
+        gid = values(gid),
+        uid = values(uid),
+        state = values(state)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update car
+        <set>
+            <if test="gid != null">
+                gid = #{gid},
+            </if>
+            <if test="uid != null">
+                uid = #{uid},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+            <if test="weight != null">
+                weight = #{weight},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from car where id = #{id}
+    </delete>
+    <!--全查询-->
+    <select id="quryByParam" parameterType="java.lang.Integer" resultMap="CarMap">
+SELECT * FROM `car`
+        LEFT JOIN  `goods` on `goods`.id=car.gid where car.state=0 and
+        uid = #{uid}
+        
+    </select>
+    <!--全查询-->
+    <select id="quryByParamid" parameterType="java.lang.Integer" resultMap="CarMap">
+        SELECT * FROM `car`
+        LEFT JOIN  `goods` on `goods`.id=car.gid where car.state=0 and
+        uid = #{uid} and car.id = #{id}
+    </select>
+</mapper>
+

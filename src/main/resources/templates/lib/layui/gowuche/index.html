@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>购物车</title>
+    <style>
+        .cart {
+            margin: 0 auto;
+            width: 700px;
+            padding: 0 10px 10px;
+            border: 1px solid #D5E5F5;
+        }
+
+        .cart-title {
+            margin-bottom: 10px;
+            font-size: 14px;
+            border-bottom: 1px solid #AED2FF;
+            line-height: 30px;
+            height: 30px;
+            font-weight: 700;
+            text-indent: 15px;
+            color: #333;
+            font-family: 'Microsoft YaHei';
+        }
+
+        .cart-table {
+            width: 100%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            font-size: 12px;
+            font-family: Verdana, "Microsoft YaHei";
+            color: #333;
+        }
+
+        .cart-table th {
+            border-bottom: 2px solid #B2D1FF;
+            font-weight: normal;
+            height: 35px;
+            line-height: 23px;
+        }
+
+        .cart-item {
+            background-color: #FAFCFF;
+            border-bottom: 1px dotted #84B3FD;
+        }
+
+
+        .cart-item td {
+            height: 55px;
+            text-align: center;
+        }
+
+        .cart-item .cart-txt-left {
+            text-align: left;
+        }
+
+        .cart-name {
+            color: #3366D4;
+            font-weight: bold;
+        }
+
+        .cart-subtotal {
+            color: #FF3334;
+            font-weight: bold;
+        }
+
+        .cart-reduce,
+        .cart-add {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            color: #FFF;
+            background-color: #BDBDBD;
+            border: 0;
+            cursor: pointer;
+            border-radius: 2px;
+            font-family: 'Arial';
+            font-size: 13.3333px;
+        }
+
+        .cart-reduce:hover,
+        .cart-add:hover {
+            background-color: #FF9900;
+        }
+
+        .cart-num {
+            margin: 5px;
+            width: 35px;
+            text-align: center;
+            height: 20px;
+            line-height: 20px;
+            padding: 0 3px;
+            display: inline-block;
+            background: #fff;
+            border: 1px solid #bbb
+        }
+
+        .cart-del,
+        .cart-all {
+            color: #3366D4;
+        }
+
+        .cart-del:hover,
+        .cart-all:hover {
+            text-decoration: underline;
+            cursor: pointer
+        }
+
+        .cart-bottom {
+            height: 55px;
+            text-align: right
+        }
+
+        .cart-bottom .cart-all {
+            position: relative;
+            top: 1px
+        }
+
+        .cart-total-price {
+            color: #FF3334;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .cart-bottom-btn {
+            color: #FFF;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0 20px;
+            background: #FE8502;
+            border: 1px solid #FF6633;
+            border-radius: 5px 5px 5px 5px;
+            padding: 6px 12px;
+        }
+
+        .cart-bottom-btn:hover {
+            background: #FF6600;
+        }
+    </style>
+    <script src="gowuche.js"></script>
+</head>
+<body>
+<div class="cart">
+    <div class="cart-title">我的购物车</div>
+    <table class="cart-table" border="" cellspacing="" cellpadding="">
+        <tr>
+            <!--      <th><span class="cart-all">全选</span></th>-->
+            <th>商品</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>小计</th>
+            <th>操作</th>
+        </tr>
+        <tbody id="tbody">
+        <tr class="cart-item">
+
+        </tr>
+        </tbody>
+
+        <tr id="cart-bottom" class="cart-bottom">
+
+        </tr>
+    </table>
+</div>
+<!--引入js文件-->
+<script src="../adminGoods/static/js/jquery.js"></script>
+<script src="../adminGoods/utils/utils.js"></script>
+<script src="../adminGoods/static/js/AjaxUtils.js"></script>
+
+<script>
+    
+    
+    var uid = serilizeUrl(location.href.toString(),'uid');
+    let url1="../../../user/select";
+    var param1={};
+    param1.id=uid;
+    let obj1 = ajaxUtils.ajaxPost(url1,param1);
+    var user=obj1.date[0];
+    
+    var gid= serilizeUrl(location.href.toString(),'gid');
+    let url2="../../../goods/select"
+    var param2={};
+    param2.id=gid;
+    let obj2 = ajaxUtils.ajaxPost(url2,param2);
+    var goods=obj2.date[0];
+
+    var oid = serilizeUrl(location.href.toString(), 'oid');
+    var params1 = {};
+    params1.id = oid;
+
+    var url3 = "http://localhost:8080/order/select"
+    var obj3 = ajaxUtils.ajaxPost(url3, params1);
+    var order=obj3.date[0];
+    
+    
+    
+    var id = serilizeUrl(location.href.toString(), 'uid');
+    var params = {};
+    params.uid = id;
+    var url = "../../../car/select";
+    var obj = ajaxUtils.ajaxPost(url, params);
+    var zonmgjia11 = 0;
+    console.log(zonmgjia11)
+    
+    
+    
+    for (var i = 0; i < obj.date.length; i++) {
+        var target = obj.date[i];
+        var template = "<tr class=\"cart-item\">\n" +
+            /*            "            <td><input onclick='(" + (target.id) + ")' id='cart-check' value='" + (target.id) + "' class=\"cart-check\" type=\"checkbox\"/></td>\n" +*/
+            "            <td><span class=\"cart-name\">" + target.name + "</span></td>\n" +
+            "            <td><span class=\"cart-price\">" + target.price + "</span></td>\n" +
+            "            <td>\n" +
+            "                <span onclick='subtract(" + (target.id) + "," + (target.weight) + ")' class=\"cart-reduce\">-</span>\n" +
+            "                <span class=\"cart-num\">" + target.weight + "</span>\n" +
+            "                <span onclick='add(" + (target.id) + "," + (target.weight) + ")' class=\"cart-add\">+</span>\n" +
+            "            </td>\n" +
+            "            <td><span class=\"cart-subtotal\">" + target.weight * target.price + "</span></td>\n" +
+            "            <td><span onclick='del(" + (target.id) + ")' class=\"cart-del\">删除</span></td>\n" +
+            "        </tr>";
+        // 将模板当儿子用
+        zonmgjia11 = zonmgjia11 + (target.price * target.weight)
+        $("#tbody").append(template);
+    }
+    var template1 = " <td colspan=\"6\">\n" +
+        "                <span class=\"cart-bottom-span\">已选择<span class=\"cart-total-num\">0</span>件商品</span>\n" +
+        "                <span class=\"cart-bottom-span\">总计：" + zonmgjia11 + "<span class=\"cart-total-price\"></span></span>\n" +
+        "                <span class=\"cart-bottom-btn\" onclick='GoMai(" + zonmgjia11 + ")'>提交订单</span>\n" +
+        "            </td>";
+    // 将模板当儿子用
+    $("#cart-bottom").append(template1);
+
+
+    /*  
+    //删除购物车方法
+    */
+    function del(id) {
+        var params = {};
+        params.id = id;
+        params.state = 1;
+        var url = "../../../car/update";
+        var obj = ajaxUtils.ajaxPost(url, params);
+        if (obj != null) {
+            alert("删除成功！")
+            history.go(0);
+        }
+
+    }
+
+    /*  
+     //减重量方法
+     */
+    function subtract(id, weight) {
+        if (weight <= 1) {
+            alert("不能在减了！")
+        } else {
+            var params = {};
+            params.id = id;
+            params.weight = weight - 1;
+            var url = "../../../car/update";
+            var obj = ajaxUtils.ajaxPost(url, params);
+            if (obj != null) {
+                history.go(0);
+            }
+
+        }
+
+    }
+
+    /*  add
+     //加重量方法
+     */
+
+    function add(id, weight) {
+        var params = {};
+        params.id = id;
+        params.weight = weight + 1;
+        var url = "../../../car/update";
+        var obj = ajaxUtils.ajaxPost(url, params);
+        if (obj != null) {
+            history.go(0);
+        }
+    }
+
+    /*
+      * 清空购物车按钮方法
+      * */
+    function GoMai(sum) {
+        var info = window.confirm("确定购买吗？");
+        if (info) {
+            var params = {};
+            params.id = id;
+            //先查询本用户的余额是否够清空购物车
+            var url = "../../../user/select";
+            var obj = ajaxUtils.ajaxPost(url, params);
+            //用总金额和自己的账户比较如果自己的余额大于购物车余额则可以购买
+            if (sum==0) {//如果sum==0证明购物车里没有商品
+                alert("您的购物车里还没有添加任何商品！请先去添加！");
+                location.href = "../adminGoods/index.html?uid=" + id;
+                
+            } else if (obj.date[0].money > sum) {//账户余额如果大于sum就进行购买方法
+                params.uid = id;
+                //查询出购物车里所以属于自己的商品
+                var list = ajaxUtils.ajaxPost("../../../car/select", params);
+                for (var i = 0; i < list.date.length; i++) {
+                    var target = list.date[i];
+                    var param = {};
+                    param.id = target.id;
+                    param.state = 1;
+                    //修改购物车里面的商品的状态为1
+                    var list1 = ajaxUtils.ajaxPost("../../../car/update", param);
+
+                    var paramss = {};
+                    paramss.id = id;
+                    paramss.money = obj.date[0].money-sum;
+                    //购买完成后吧当前账号的余额减下去
+                    var flag=ajaxUtils.ajaxPost("../../../user/update",paramss);
+
+                
+                }
+                for (var j = 0; j < list.date.length; j++) {
+                    
+                    //添加
+                    //商品总价
+                    var Totalprice= serilizeUrl(location.href.toString(),'Totalprice');
+
+                    var param1={};
+                    param1.uid=user.id;
+
+                    param1.date= new Date();
+                    param1.address=order.address;
+                    param1.iphone=order.iphone;
+                    param1.gid = target.gid;
+
+                    let url="../../../order/add";
+                    let flagq = ajaxUtils.ajaxPost(url,param1);
+
+                    //如果当前obj为空就提示密码或姓名错误
+                    if (flagq.code==200){
+                        alert("订单提交成功");
+                        var param2={};
+                        param2.id=user.id;
+                        param2.name=user.name;
+                        param2.pwd=user.pwd;
+                        param2.money=(user.money-Totalprice);
+
+                        let urlz="../../../user/update";
+                        let flag1 = ajaxUtils.ajaxPost(urlz,param2);
+                        if (flag1.code==200){
+                            console.log("已扣款")
+                        }
+                        window.history.back();
+                        alert("购买完成！");
+
+                        location.href = "../dingdan/index.html?uid=" + id;
+                    }else {
+                        alert("订单提交失败");
+                        window.history.back();
+                    }
+                }
+                
+                //history.go(0);
+            } else { // 余额不足就跳到充值页面
+                alert("您的账号余额不足，请先去充值！")
+                location.href = "../adminGoods/Top-up.html?uid=" + id;
+            }
+        }
+    }
+    
+</script>
+</body>
+</html>

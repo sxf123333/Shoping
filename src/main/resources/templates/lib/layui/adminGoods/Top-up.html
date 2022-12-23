@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="bootstrap.min.css">
+
+<!-- Loding font -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,700" rel="stylesheet">
+
+<!-- Custom Styles -->
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+<title>充值页</title>
+	<script src="static/js/jquery-1.12.4.min.js"></script>
+	<script src="utils/utils.js"></script>
+
+</head>
+<body>
+
+<!-- Backgrounds -->
+
+<div id="login-bg" class="container-fluid">
+
+  <div class="bg-img"></div>
+  <div class="bg-color"></div>
+</div>
+
+<!-- End Backgrounds -->
+
+<div class="container" id="login">
+	<div class="row justify-content-center">
+	<div class="col-lg-8">
+	  <div class="login">
+		<h1>充值页</h1>
+		<!-- Loging form -->
+			  <form>
+				<div class="form-group">
+					<input disabled="disabled" type="text" class="form-control" id="CurrentBalance" name="thisMoney" aria-describedby="emailHelp" placeholder="当前余额">
+				</div>
+				<div class="form-group">
+					<input onkeyup = "value=value.replace(/[^\d]/g,'')" type="text" class="form-control" id="TopupBalance" name="TopupBalance" placeholder="充值金额">
+				</div>
+
+				  <button type="button" class="btn btn-lg btn-block btn-success" onclick="sub()">充值</button>
+				  <button type="button" class="btn btn-lg btn-block btn-success" onclick="window.history.go(-1)">返回</button>
+			  </form>
+		 <!-- End Loging form -->
+	  </div>
+	</div>
+	</div>
+</div>
+<script src="static/js/jquery.js"></script>
+<script src="static/js/AjaxUtils.js"></script>
+<script>
+	var uid = serilizeUrl(location.href.toString(),'id');
+	var url="../../../user/select";
+	var param={};
+	param.id=uid;
+	var obj = ajaxUtils.ajaxPost(url,param);
+	$(function () {
+
+		if (obj.date[0].money==0||obj.date[0].money==null){
+			$("[name=thisMoney]").val(0);
+		}else {
+			$("[name=thisMoney]").val(obj.date[0].money);
+		}
+
+	})
+	function sub() {
+		var param={};
+		var thisMoney=parseInt($("[name=thisMoney]").val());
+		var TopupBalance=parseInt($("[name=TopupBalance]").val());
+		if (TopupBalance>0){
+			param.money=thisMoney+TopupBalance;
+
+		}else {
+			param.money=thisMoney;
+		}
+		param.id=obj.date[0].id;
+		param.name=obj.date[0].name;
+		param.pwd=obj.date[0].pwd;
+		param.adminid=obj.date[0].adminid;
+		//将对象转换成json
+		//使用ajax将参数发送到后端进行验证
+        let url="../../../user/update";
+		let flag=ajaxUtils.ajaxPost(url,param);
+		console.log(flag);
+		//如果当前obj为空就提示密码或姓名错误
+		if (flag.code==200){
+			alert("充值成功");
+			window.history.back();
+		}else {
+			alert("充值失败");
+			window.history.back();
+		}
+	}
+
+</script>
+</body>
+</html>
